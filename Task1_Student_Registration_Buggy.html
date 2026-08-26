@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f2f2f2;
+        }
+
+        #student-title {
+            text-align: center;
+            color: darkblue;
+        }
+
+        #studentForm {
+            width: 450px;
+            border: 2px solid black;
+            padding: 20px;
+            margin: 20px auto;
+        }
+
+        .input-box {
+            margin-bottom: 12px;
+        }
+
+        #resultBox {
+            width: 450px;
+            border: 1px solid green;
+            padding: 15px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1 id="student-title">Student Registration Form</h1>
+
+<form id="studentForm">
+
+    <div class="input-box">
+        <label for="studentName">Student Name:</label>
+        <input type="text" id="studentName" required>
+    </div>
+
+    <div class="input-box">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+    </div>
+
+    <div class="input-box">
+        <label for="mobile">Mobile Number:</label>
+        <input type="number" id="mobile">
+    </div>
+
+    <div class="input-box">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob">
+    </div>
+
+    <div class="input-box">
+        <label for="course">Course:</label>
+
+        <select id="course" required>
+            <option value="">Select Course</option>
+            <option value="BCA">BCA</option>
+            <option value="MCA">MCA</option>
+            <option value="BTech">B.Tech</option>
+        </select>
+    </div>
+
+    <div class="input-box">
+        <label>Expertise:</label>
+
+        <input type="checkbox" id="html" value="HTML"> HTML
+        <input type="checkbox" id="css" value="CSS"> CSS
+        <input type="checkbox" id="js" value="JavaScript"> JavaScript
+    </div>
+
+    <button type="button" onclick="showStudent()">
+        Register Student
+    </button>
+
+</form>
+
+<div id="resultBox">
+    Registration information will appear here.
+</div>
+
+<script>
+
+function showStudent() {
+
+    // Get form information
+    var name =
+        document.getElementById("studentName").value.trim();
+
+    let email =
+        document.getElementById("email").value.trim();
+
+    const mobile =
+        document.getElementById("mobile").value;
+
+    let dob =
+        document.getElementById("dob").value;
+
+    var course =
+        document.getElementById("course").value;
+
+
+    // Validate required fields
+    if (name === "" || email === "" || course === "") {
+        alert("Student Name, Email and Course are required");
+        return;
+    }
+
+
+    // Get semester
+    var semester =
+        prompt("Enter Current Semester");
+
+
+    // Validate semester
+    if (semester === null || semester.trim() === "") {
+        alert("Valid semester is required");
+        return;
+    }
+
+    semester = semester.trim();
+
+
+    // Check expertise
+    var expertise = [];
+
+    if (document.getElementById("html").checked) {
+        expertise.push("HTML");
+    }
+
+    if (document.getElementById("css").checked) {
+        expertise.push("CSS");
+    }
+
+    if (document.getElementById("js").checked) {
+        expertise.push("JavaScript");
+    }
+
+
+    // At least one expertise is required
+    if (expertise.length === 0) {
+        alert("Please select at least one expertise");
+        return;
+    }
+
+
+    // Confirmation
+    var choice =
+        confirm("Do you want to submit the registration?");
+
+
+    // Stop if user selects Cancel
+    if (choice === false) {
+        return;
+    }
+
+
+    // Display registration result
+    document.getElementById("resultBox").innerHTML =
+        "<h2>Student Information</h2>" +
+        "Name: " + name +
+        "<br>Email: " + email +
+        "<br>Mobile: " + mobile +
+        "<br>DOB: " + dob +
+        "<br>Course: " + course +
+        "<br>Semester: " + semester +
+        "<br>Expertise: " + expertise.join(", ");
+
+
+    // Success message
+    alert("Registration successful");
+}
+
+</script>
+
+</body>
+</html>
